@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Overlay, Input, Button, Icon } from 'react-native-elements'
 
-export default class OverlayOneInput extends Component {
+export default class OverlayTwoInputs extends Component {
 
     constructor(props) {
         super(props);
@@ -12,16 +12,25 @@ export default class OverlayOneInput extends Component {
         }
     }
 
-    onChangeInput = inputData => {
+    onChangeInputOne = inputData => {
         this.setState({
-            valueInput: inputData
+            valueInputOne: inputData
+        })
+    }
+
+    onChangeInputTwo = inputData => {
+        this.setState({
+            valueInputTwo: inputData
         })
     }
     
     update = () => {
-        const newValue = this.state.valueInput;
+        const newValueOne = this.state.valueInputOne;
+        const newValueTwo = this.state.valueInputTwo;
+
+        console.log(newValueOne, newValueTwo);
         
-        this.state.updateFunction(newValue);
+        this.state.updateFunction(newValueOne, newValueTwo)
         
         this.setState({
             isVisibleOverlay: true
@@ -35,8 +44,9 @@ export default class OverlayOneInput extends Component {
 
         this.state.updateFunction(null)
     }
+
     render() {
-        const { isVisibleOverlay, placeholder, valueInput } = this.state;
+        const { isVisibleOverlay, placeholderOne, placeholderTwo, valueInputOne, valueInputTwo, isPassword } = this.state;
         return (
             <Overlay isVisible={isVisibleOverlay}
                     //  width="auto"
@@ -51,10 +61,16 @@ export default class OverlayOneInput extends Component {
                           size={30}
                           onPress={() => this.close()}
                           containerStyle={styles.iconContainer}/>
-                    <Input placeholder={placeholder}
+                    <Input placeholder={placeholderOne}
                            containerStyle={styles.inputStyle}
-                           onChangeText={(value) => this.onChangeInput(value)}
-                           value={valueInput} />
+                           onChangeText={(value) => this.onChangeInputOne(value)}
+                           value={valueInputOne} />
+                    <Input placeholder={placeholderTwo}
+                           containerStyle={styles.inputStyle}
+                           onChangeText={(value) => this.onChangeInputTwo(value)}
+                           isPassword={isPassword}
+                           secureTextEntry={isPassword}
+                           value={valueInputTwo} />
                     <Button title='Actualizar'
                             buttonStyle={styles.btnUpdate}
                             onPress={() => this.update()} />

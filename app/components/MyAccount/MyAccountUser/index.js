@@ -14,10 +14,6 @@ export default class MyAccountUser extends Component {
         return (
             <View style={styles.viewBody}>
                 <UserInfo />
-                {/* <Button title='Cerrar sesión'
-                        containerStyle={styles.btnLogout}
-                        onPress={() => logout()}/> */}
-
             </View>
         )
     }
@@ -25,5 +21,7 @@ export default class MyAccountUser extends Component {
 
 const styles = StyleSheet.create({
     viewBody: {
+        height: '100%',
+        backgroundColor: '#f2f2f2'
     }
 })
